@@ -1,51 +1,50 @@
 # Sobre o código 
-PARÂMETROS
-    Para o correto funcionamento dos códigos alguns para parametro devem ser configurados antes de sua execucao
-    Em util.py
-        Path de todos os dataset
-        num_cores utilizando nos processamentos. Todas de longo tempo desenvolvidas nesta trabalho foram paralelizadas, e todas elas utilizarao o parametro num_cores.
-    Em train.py
-        MODEL_ACTION
-            TEST_ALL_CLASSIFIERS - Testa todos os classificadores sobre os features selecionados
-            TEST_BIG_CLASSIFIER  - Monta o big classificador apresentado e explicado no "artigo"
+* PARÂMETROS
+    * Para o correto funcionamento dos códigos alguns para parametro devem ser configurados antes de sua execucao
+    * Em util.py
+        * Path de todos os dataset
+        * num_cores utilizando nos processamentos. Todas de longo tempo desenvolvidas nesta trabalho foram paralelizadas, e todas elas utilizarao o parametro num_cores.
+    * Em train.py
+        * MODEL_ACTION
+            * TEST_ALL_CLASSIFIERS - Testa todos os classificadores sobre os features selecionados
+            * TEST_BIG_CLASSIFIER  - Monta o big classificador apresentado e explicado no "artigo"
                                    gerado desse trabalho
-                IMAGE_ROTULATION - Rotulas novas imagens com o big classificar, sendo a nova imagem
+                * IMAGE_ROTULATION - Rotulas novas imagens com o big classificar, sendo a nova imagem
                                    adiciona ao dataset somente se todos os classificadores gerarem 
                                    a mesma classe
-                    AMOS - Rotula dados do dataset AMOS
+                * AMOS - Rotula dados do dataset AMOS
 
-Os códigos possuiem documentações resumidas em todas as suas funções, que devem ser lidas para uma correta execução
+* Os códigos possuiem documentações resumidas em todas as suas funções, que devem ser lidas para uma correta execução
 
-ARQUIVOS E SUAS FUNCIONALIDADES
-    deep_learning_train.py
-        Realiza o treinamento das CNNs com fine tunning
+* ARQUIVOS E SUAS FUNCIONALIDADES
+    * deep_learning_train.py
+        * Realiza o treinamento das CNNs com fine tunning
 
-    feature_extraction_CNN.py
-        Realiza a extracao de features utilizando CNNs
+    * feature_extraction_CNN.py
+        * Realiza a extracao de features utilizando CNNs
 
-    feature_extraction.py
-        Realiza a extracao de features do histograma, co-matriz e LBP
+    * feature_extraction.py
+        * Realiza a extracao de features do histograma, co-matriz e LBP
 
-    process_dataset_AMOS.py
-        Funçoes de processamento de dados para o dataset AMOS
+    * process_dataset_AMOS.py
+        * Funçoes de processamento de dados para o dataset AMOS
 
-    process_dataset_nexet.py
-        Funçoes de processamento de dados para o dataset nexet
+    * process_dataset_nexet.py
+        * Funçoes de processamento de dados para o dataset nexet
 
-    process_dataset_transient.py
-        Funçoes de processamento de dados para o dataset transient
+    * process_dataset_transient.py
+        * Funçoes de processamento de dados para o dataset transient
 
-    train.py
-        Realiza o treinamento de todos os classificadores (os features já devem ter sido extraidos), exceto os deep models
+    * train.py
+        * Realiza o treinamento de todos os classificadores (os features já devem ter sido extraidos), exceto os deep models
 
-    util.py
-        Diversas funções de "uso geral" que foram necessárias no decorrer deste trabalho
+    * util.py
+        * Diversas funções de "uso geral" que foram necessárias no decorrer deste trabalho
 
-    vgg16_places_365.py
-        Modelo pre treinado do vgg16_places_365
+    * vgg16_places_365.py
+        * Modelo pre treinado do vgg16_places_365
 
 # Classificação de Imagens Noite-Dia
-
 
 ## Introdução
 
@@ -114,7 +113,7 @@ Para a extração de features utilizando o GLCM, a imagem teve sua quantidade de
 Os resultados dos experimentos podem ser vistos na tabela abaixo, onde (I) representa o histograma e (II) o GLCM. A métrica apresentada na tabela é o f1 score sobre 20% dos dados dividos utilizando cross validation.
 
 | Classificador       |   I       |   II      |   I + II    |
-| ---- | ------| ------| -----| -----| 
+| ---- | ------| ------| -----|
 | Linear SVM          |   84.81% |   88.70% |   90.85%   |
 | Decision Tree       |   82.17% |   82.52% |   85.39%   |
 | Random Forest       |   88.89% |   88.87% |   90.81%   |
@@ -125,7 +124,7 @@ Os resultados dos experimentos podem ser vistos na tabela abaixo, onde (I) repre
 Em seguida, foram extraídos features utilizando o Local Binary Pattern (LBP) com 100 pontos e raio 25. Do resultado do LBP foi computado um histograma normalizado com 100 bins, que foram utilizados como features. Este processo é repetido para cada canal da imagem o que totaliza 300 valores. Os resultando dos experimentos podem ser vistos na tabela abaixo, onde (III) representa a utilização dos features extraídos com LBP.
 
 | Classificador       |   III     |   II + III  |  I + II + III  |
-| -----| ------| ------| 
+| -----| ------| ------| ------|
 | Linear SVM          |   82.82% |   89.39% |   90.15%|
 | Decision Tree       |   76.66% |   84.44% |   84.67%|
 | Random Forest       |   80.00% |   91.36% |   90.72%|
@@ -221,7 +220,6 @@ Após realizar o treinamento por uma epoch tendo 90% das camadas do modelo conge
 | Treinamento | Validação |
 | ----- | ------ |
 | Loss   | Accuracy    |    Loss           |  Accuracy             | 
-|-----|------|------|-------|
 | 0.3222 |      97.14% |    0.3469         |    96.07%             | 
 
 
@@ -241,13 +239,10 @@ Para o modelo anterior, foi realizada a predição sobre o conjunto de teste (ap
 
 
 |           | Predict Dia | Predict Noite | Predict Trans |
-|-----|------|--------|-------| 
+|-------|------|-------|--------|
 | Dia       | 589         | 0             | 1             |
-|-----|------|--------|-------| 
 | Noite     | 3           | 562           | 15            |
-|-----|------|--------|-------| 
 | Trans     | 9           | 7             | 384           |
-|-----|------|--------|-------| 
 
 
 A fim de realizar a verificação do modelo desenvolvido neste trabalho, efetuou-se o teste sobre o dataset de um problema sobre outro domínio, o Nexet, sendo este composto por 50 mil imagens de estradas, capturadas a partir do interior de veículos.
