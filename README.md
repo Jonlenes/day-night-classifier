@@ -11,9 +11,9 @@
                 * IMAGE_ROTULATION - Labeling of New images with the 'big' classifier, being the image added to the dataset only if all classifiers labeled with the same class;
                 * AMOS - Labeling data of the dataset AMOS;
 
-* Os arquivos possuem documentação resumidas em todas as suas funções.
+* The files have documentation summarized in all their functions.
 
-* ARQUIVOS E SUAS FUNCIONALIDADES
+* Files
     * deep_learning_train.py: Train CNNs with fine tuning;
     * feature_extraction_CNN.py: Feature extraction with CNNs;
     * feature_extraction.py: Feature extraction with histogram, co-matrix e LBP;
