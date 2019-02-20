@@ -26,7 +26,7 @@
 
 # Night-Day Image Classification
 
-For more information, read EQM (Portugues).pdf or contact me.
+For more information, read Report.pdf (in Portuguese) or contact me.
 
 ## Introdução
 
