@@ -8,40 +8,21 @@
         * MODEL_ACTION
             * TEST_ALL_CLASSIFIERS - Tests all classifiers under selected features;
             * TEST_BIG_CLASSIFIER  - Train/Test the 'big' classifier presented and explained in the paper;
-                * IMAGE_ROTULATION - Rotulas novas imagens com o big classificar, sendo a nova imagem
-                                   adiciona ao dataset somente se todos os classificadores gerarem 
-                                   a mesma classe
-                * AMOS - Rotula dados do dataset AMOS
+                * IMAGE_ROTULATION - Labeling of New images with the 'big' classifier, being the image added to the dataset only if all classifiers labeled with the same class;
+                * AMOS - Labeling data of the dataset AMOS;
 
-* Os códigos possuiem documentações resumidas em todas as suas funções, que devem ser lidas para uma correta execução
+* Os arquivos possuem documentação resumidas em todas as suas funções.
 
 * ARQUIVOS E SUAS FUNCIONALIDADES
-    * deep_learning_train.py
-        * Realiza o treinamento das CNNs com fine tunning
-
-    * feature_extraction_CNN.py
-        * Realiza a extracao de features utilizando CNNs
-
-    * feature_extraction.py
-        * Realiza a extracao de features do histograma, co-matriz e LBP
-
-    * process_dataset_AMOS.py
-        * Funçoes de processamento de dados para o dataset AMOS
-
-    * process_dataset_nexet.py
-        * Funçoes de processamento de dados para o dataset nexet
-
-    * process_dataset_transient.py
-        * Funçoes de processamento de dados para o dataset transient
-
-    * train.py
-        * Realiza o treinamento de todos os classificadores (os features já devem ter sido extraidos), exceto os deep models
-
-    * util.py
-        * Diversas funções de "uso geral" que foram necessárias no decorrer deste trabalho
-
-    * vgg16_places_365.py
-        * Modelo pre treinado do vgg16_places_365
+    * deep_learning_train.py: Train CNNs with fine tuning;
+    * feature_extraction_CNN.py: Feature extraction with CNNs;
+    * feature_extraction.py: Feature extraction with histogram, co-matrix e LBP;
+    * process_dataset_AMOS.py: Data processing functions for the AMOS dataset;
+    * process_dataset_nexet.py: Data processing functions for the Nexet dataset;
+    * process_dataset_transient.py: Data processing functions for the Transient dataset;
+    * train.py: Train all classifiers (the features have already been extracted, except in the case of deep models);
+    * util.py: Several "general purpose" functions that were required during this work;
+    * vgg16_places_365.py: Pre-trained model vgg16_places_365.
 
 # Classificação de Imagens Noite-Dia
 
