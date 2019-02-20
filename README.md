@@ -24,7 +24,9 @@
     * util.py: Several "general purpose" functions that were required during this work;
     * vgg16_places_365.py: Pre-trained model vgg16_places_365.
 
-# Classificação de Imagens Noite-Dia
+# Night-Day Image Classification
+
+For more information, read EQM (Portugues).pdf or contact me.
 
 ## Introdução
 
