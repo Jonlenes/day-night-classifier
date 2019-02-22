@@ -28,42 +28,28 @@
 
 For more information, read Report.pdf (in Portuguese) or contact me.
 
-## Introdução
-
-Utilizar máquinas para resolver problemas e tomar decisões, sem que haja o constante monitoramento humano, é parte do desafio que impulsiona o desenvolvimento de pesquisas em aprendizagem de máquina. Para tanto, algumas técnicas e modelos foram desenvolvidos, de modo a auxiliar esta aprendizagem.
-
-Em face disto, algumas destas técnicas de aprendizagem de máquina foram utilizadas neste trabalho, no intuito de resolver o problema de classificação de imagem entre dia e noite, que consiste em identificar, independentemente das condições climáticas, se uma imagem foi capturada durante o dia ou a noite.
- 
-A proposta apresentada neste refere-se a realização da aprendizagem de máquina, em que esta é submetida a um dataset com diversas imagens e então realiza-se a classificação entre elas com base no período em que foram capturadas. 
-
-
-### Trabalhos relacionados
-
-Alguns trabalhos já foram desenvolvidos visando solucionar problema similar ao deste trabalho, com um enfoque maior em identificar, a partir de diferentes períodos do dia, o mesmo lugar, como apresentado pelo.
-
-Entretanto, não foi encontrado um dataset rotulado para realizar a classificação apenas em períodos do dia, sendo necessária a utilização de alguns datasets, como especificado na seção datasets, para a construção de um outro dataset, sendo este utilizado para o desenvolvimento deste trabalho.
-
 ### Datasets
+* Transient (http://transattr.cs.brown.edu/);
+* AMOS (http://cs.uky.edu/~jacobs/datasets/amos/);
+* Barcelona (http://www.cs.unc.edu/~jtighe/Papers/ECCV10/);
+* Places (https://ieeexplore.ieee.org/document/7968387).
 
-Para a realização desse trabalho foram utilizados como datasets o  Transient, o AMOS, o Barcelona e o Places.
+## Samples
 
-O primeiro dataset a ser utilizado para este problema é o Transient, pois contém 8571 imagens de 101 webcams, já rotuladas com 40 labels.
+### <p align="center"> Day </p>
+<p align="center"> <img width="400" src="imgs/dia1.jpg"> </p>
+<p align="center"> <img width="400" src="imgs/dia1.jpg"> </p>
 
-Em seguida, utiliza-se um subconjunto do AMOS, tendo em vista que em sua totalidade ele contém 1.128.087.180 imagens, extraídas por 29945 webcams rotuladas com o dia e hora da captura. Já o Places contém mais de 10 milhões de imagens, incluindo cerca de 400 categorias de cenas e o Barcelona, contém apenas imagens capturadas na cidade de Barcelona com boa resolução.
+### <p align="center"> Transition </p>
+<p align="center"> <img width="400" src="imgs/tran1.jpg"> </p>
+<p align="center"> <img width="400" src="imgs/tran2.jpg"> </p>
 
-## Construção do dataset
 
-Conforme mencionado por Laffont(2014), os atributos do dataset Transient possuem seus valores variando entre 0 e 1, em que valores menores que 0.2 são considerados fortes negativos e valores maiores que 0.8 são considerados fortes positivos. Embasando-se nesta afirmação e nos experimentos realizados, definiu-se o critério inicial para classificar os exemplos deste dataset em dia ou noite, sendo utilizados como atributos o daylight, que representa a quantidade de luz do dia contida na imagem e o night que consiste na representação da noite.
+### <p align="center"> Night </p>
+<p align="center"> <img width="400" src="imgs/noit1.jpg"> </p>
+<p align="center"> <img width="400" src="imgs/noit2.jpg"> </p>
 
-Com isso foi possível classificar as imagens entre dia e noite, a partir do percentual de cada atributo, distribuídos da seguinte maneira: daylight > 0.8 e night < 0.2 atribui-se a classe dia; daylight < 0.2 e night > 0.8 atribui-se a classe noite.
 
-A partir desta configuração foi realizada a classificação de 40% do Transient, entretanto, dentre os exemplos que foram classificados como noite (523), verificou-se que uma parcela significativa deles representavam momentos de transição (fim de tarde/início do dia e nascer/pôr do sol), onde, até mesmo pela identificação manual era difícil realizar a classificação da imagem em dia ou noite.
-
-Com o intuito de solucionar este problema, outra classe foi adicionada ao processo de classificação desse trabalho, intitulada transição, que representa justamente os momentos anteriormente mencionados. Justaposto a isso foram acrescidos alguns atributos para auxiliar a realização da classificação do Transient, sendo sunrisesunset (nascer e pôr do sol), dawndusk (amanhecer-anoitecer) e sunny (ensolarado).
-
-<p align="center">
-  <img src="imgs/dia1.jpg">
-  <img src="imgs/dia2.jpg">
   <img src="imgs/tran1.jpg">
   <img src="imgs/tran2.jpg">
   <img src="imgs/noit1.jpg">
