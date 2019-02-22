@@ -34,53 +34,28 @@ For more information, read Report.pdf (in Portuguese) or contact me.
 * Barcelona (http://www.cs.unc.edu/~jtighe/Papers/ECCV10/);
 * Places (https://ieeexplore.ieee.org/document/7968387).
 
-## Samples
+## Extracted Samples
 
 ### <p align="center"> Day </p>
-<p align="center"> <img width="400" src="imgs/dia1.jpg"> </p>
-<p align="center"> <img width="400" src="imgs/dia1.jpg"> </p>
+<p align="center"> <img width="600" src="imgs/dia1.jpg"> </p>
+<p align="center"> <img width="600" src="imgs/dia2.jpg"> </p>
 
 ### <p align="center"> Transition </p>
-<p align="center"> <img width="400" src="imgs/tran1.jpg"> </p>
-<p align="center"> <img width="400" src="imgs/tran2.jpg"> </p>
+<p align="center"> <img width="600" src="imgs/tran1.jpg"> </p>
+<p align="center"> <img width="600" src="imgs/tran2.jpg"> </p>
 
 
 ### <p align="center"> Night </p>
-<p align="center"> <img width="400" src="imgs/noit1.jpg"> </p>
-<p align="center"> <img width="400" src="imgs/noit2.jpg"> </p>
-
-
-  <img src="imgs/tran1.jpg">
-  <img src="imgs/tran2.jpg">
-  <img src="imgs/noit1.jpg">
-  <img src="imgs/noit2.jpg">
-</p>
-
-
-Considerando as 3 classes e após alguns experimentos, uma nova configuração para a classificação do Transient foi definida, como mostradas a seguir:
-
-* Extração das imagens com sunrisesunset > 0.8 ou dawndusk > 0.8, para representar os momentos de transição (classe Transition);
-* Após a remoção das imagens de transição, realizar a extração das imagens com night > 0.8, que representam as imagens noturnas (classe Night);
-* Nas imagens restantes, extrai-se aquelas com daylight > 0.8 ou sunny > 0.8, que representam as imagens de dia (Classe Day).
-
-Após este experimento, foi possível classificar 660 imagens como transição, 396 como noite e 4195 como dia, o que representa apenas 65% do Transient, porém, ao ser realizada a conferência manual das classes, foi verificado que apesar da divisão ter melhorado em relação a anterior, ainda continha várias classes incorretas.
-
-Ao ter sido realizado alguns testes com os atributos, decidiu-se selecionar todos os exemplos corretos da classe noite, no total de 332 exemplos e selecionar nas outras duas classes apenas 332 exemplos também, que serão utilizados para o treinamento dos classificadores, para rotular novas imagens e assim aumentar o dataset.
-
-## Rotulação de novas imagens
-
-Como esse dataset rotulado, foi realizada a extração de features e treinamento de alguns classificadores para ajudar no processo de rotulação e aumentar o dataset atual. Ressalta-se que antes de realizar os treinamentos mencionados nesta seção, foi realizado o processo de feature scaling, assim como foram utilizados parâmetros de regularização para cada classificador. Já a extração de features foram utilizadas imagens redimensionadas em 512 x 512 pixels. 
+<p align="center"> <img width="600" src="imgs/noit1.jpg"> </p>
+<p align="center"> <img width="600" src="imgs/noit2.jpg"> </p>
 
 ### Features extraction
 
-Para dar início aos experimentos foram utilizados os métodos de cálculo do histograma e gray-level co-occurrence matrix (GLCM) da imagem, sendo o histograma calculado para cada canal de cor da imagem (RGB), produzindo 256 features por canal, totalizando 768 features.
+(I) - Histogram
+(II) o GLCM. 
+F1-score over 20% of the data - cross validation.
 
-
-Para a extração de features utilizando o GLCM, a imagem teve sua quantidade de tons reduzidos de 256 para 32 a fim de diminuir a quantidade de features, e ao aplicar o GLCM nessa nova imagem foi extraída uma matriz de 32x32x3 que gerou 3072 features.
-
-Os resultados dos experimentos podem ser vistos na tabela abaixo, onde (I) representa o histograma e (II) o GLCM. A métrica apresentada na tabela é o f1 score sobre 20% dos dados dividos utilizando cross validation.
-
-| Classificador       |   I       |   II      |   I + II    |
+| Classifier       |   I       |   II      |   I + II    |
 | ---- | ------| ------| -----|
 | Linear SVM          |   84.81% |   88.70% |   90.85%   |
 | Decision Tree       |   82.17% |   82.52% |   85.39%   |
@@ -89,9 +64,9 @@ Os resultados dos experimentos podem ser vistos na tabela abaixo, onde (I) repre
 | Naive Bayes         |   79.05% |   68.89% |   69.66%   |
 | Logistic Reg        |   84.80% |   86.66% |   90.69%   |
 
-Em seguida, foram extraídos features utilizando o Local Binary Pattern (LBP) com 100 pontos e raio 25. Do resultado do LBP foi computado um histograma normalizado com 100 bins, que foram utilizados como features. Este processo é repetido para cada canal da imagem o que totaliza 300 valores. Os resultando dos experimentos podem ser vistos na tabela abaixo, onde (III) representa a utilização dos features extraídos com LBP.
+(III)  - Local Binary Pattern (LBP)
 
-| Classificador       |   III     |   II + III  |  I + II + III  |
+| Classifier       |   III     |   II + III  |  I + II + III  |
 | -----| ------| ------| ------|
 | Linear SVM          |   82.82% |   89.39% |   90.15%|
 | Decision Tree       |   76.66% |   84.44% |   84.67%|
@@ -101,36 +76,18 @@ Em seguida, foram extraídos features utilizando o Local Binary Pattern (LBP) co
 
 ### Features from deep model
 
-Para os experimentos de extração de features utilizando deep models, foram utilizados o ResNet50, InceptionV3 (IncV3) e Xception (Xcp) pré-treinados com o dataset ImageNet.
-
-Em cada um deles foi removida a camada fully-connected (camada do topo) e os valores antes repassados para esta camada foram utilizados como features para treinar os classificadores. A tabela abaixo apresenta os resultados (f1 score) utilizando estes modelos.
-
-| Classificador       |   ResNet50    |   IncV3       |  Xcp  |
+| Classifier       |   ResNet50    |   IncV3       |  Xcp  |
 | ---------| --------| -----------| -----------| 
 | Linear SVM          |   94.77%     |   92.66%     |   91.85%|
 | Random Forest       |   91.87%     |   79.39%     |   76.17%|
 | Neural Network      |   95.73%     |   91.68%     |   90.20%|
 | Logistic Reg        |   95.24%     |   68.79%     |   80.07%|
 
-### Incrementando o dataset
-
-Como pode ser visualizado na subseção anterior, determinados conjuntos de features apresentam melhores resultados dependendo do classificador utilizado. Em face disto e considerando que a rotulação de dados é crucial e não deve conter erros, serão utilizados vários classificadores com diferentes features.
-
-Para esta etapa, foram selecionados os classificadores e seus respectivos features, que obtiveram melhores f1 score, sendo todos treinados e utilizados na rotulação. O modelo representativo deste processo pode ser visualizado na figura abaixo, que contém o classificador e seus features.
+### Increasing the dataset
 
 <p align="center">
   <img src="imgs/network.png">
 </p>
-
-De acordo com o referido modelo, uma nova imagem será adicionada ao dataset se, além de todos os classificadores rotulá-la como sendo da mesma classe, a rotulação manual também for positiva.
-
-Esse processo é executado recursivamente de modo a realizar o treinamento dos classificadores com o dataset atual e calcular o f1 score sobre os 20% de dados da validação, a fim de certificar que os classificadores estão com boa precisão. Em seguida, adiciona-se as novas imagens e repete-se todo o processo novamente até que não haja mais imagens para serem rotuladas ou até que se obtenha um dataset com tamanho aceitável.
-
-Devido o processo de rotulação do dataset ser trabalhoso e demandar muito tempo, foi definido um limite de dados para compor o dataset, sendo este de aproximadamente 9 mil imagens, ou seja, 3 mil de cada classe. As imagens utilizadas para compor este dataset foram extraídas do Transient, do AMOS e do Barcelona.
-
-Com o intuito de obter maior diversidade das imagens, tendo em vista as características específicas de cada dataset, dado que o Transient apresenta imagens em cenários abertos e com diferentes condições climáticas, o AMOS imagens de monitoramento com baixa resolução, e o Barcelona com registros urbanos em cenários menos amplos e com boa resolução, foram combinadas amostras de cada dataset para cada classe. Também com esse objetivo, as imagens extraídas do AMOS e do Transient foram selecionadas aleatoriamente, pois eles contém imagens bastaste parecidas indicativa de sequencialidade.
-
-Após a junção dos datasets obteve-se uma nova base de dados com diferentes cenários e condições climáticas, e assim, por estar mais diversificado, apresenta melhores informações para o treino. Para realizar o teste do modelo, foram selecionadas um mil imagens com a mesma proporção por classes.
 
 ## Aprimoramento do modelo
 
