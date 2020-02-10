@@ -1,5 +1,7 @@
 # Night-Day Image Classification
 
+Application of several techniques of data collection and labeling, Machine Learning and Deep Learning to solve the problem, which aims to classify an image in one of three classes: day (the first two images), transition (the third and fourth ) and night (last two). The accuracy obtained in the best model for this problem was 98%.
+
 For more information, read Report.pdf (in Portuguese) or contact me.
 
 ### Datasets
